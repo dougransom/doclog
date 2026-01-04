@@ -283,7 +283,9 @@ generate_page_docs(Sections) :-
 
 
 write_sitemap(OutputFolderPath) :-
-    append(OutputFolderPath, "/sitemap.xml", SitemapPath),
+    path_segments(OutputFolderPath, OutputFolderSg),
+    append(OutputFolderSg, ["sitemap.xml"], SitemapPathSg),
+    path_segments(SitemapPath, SitemapPathSg),
 	findall(S,sitemap_url(S),URLs),
     phrase_to_file(sitemap_xml(URLs), SitemapPath).
 	
